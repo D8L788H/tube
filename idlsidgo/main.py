@@ -28,9 +28,9 @@ tubes = Tube(num, num)
 length = [0]*num
 letter = []
 for times in range(total):
-    # get a random value for choosing a letter from the values list, and add
-    # 1 to the position of that letter in the variable 'letter',
-    # if it exceeds the num (length of the column), it gets a new rand value
+    # get a random letter from the values list, if the number of same
+    # letters exceeds the column number, that letters gets removed
+    # from the values list.
     x = choice(values)
     letter.append(x)
     if letter.count(x) == num:
@@ -48,7 +48,8 @@ for times in range(total):
                 y = new_y
                 break
         length[y] += 1
-
+        
+    # add the random values to the tubes using add method
     tubes.add(x, y, 1)
 
 print()
