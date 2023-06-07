@@ -51,6 +51,8 @@ for times in range(total):
         
     # add the random values to the tubes using add method
     tubes.add(x, y, 1)
+    # haaya ene deed taliin method add hiih ystoigoosoo 1 ymuu 2oor baga useg add hiigeed baih ym
+    # yagaad gedgiig n uneheer oilgodgue
 
 print()
 print(tubes)
