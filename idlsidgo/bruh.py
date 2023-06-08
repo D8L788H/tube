@@ -1,4 +1,18 @@
 # Classes for managing the tubes
+class TubeIterator:
+    def __init__(self, tube):
+        self.__tube = tube
+        self.__index = 0
+
+    def __next__(self):
+        result = 'did not iterate'
+        print(self.__tube.tubes)
+        if self.__index < len(self.__tube.tubes):
+            result = self.__tube.tubes[self.__index]
+            self.__index += 1
+            return result
+        raise StopIteration
+
 
 class Tube:
     # init methods only:
@@ -12,12 +26,14 @@ class Tube:
                 tube.append(' ')
             self.tubes.update({y: tube})
 
-    def add(self, value, key, quantity):
-        for item in range(len(self.tubes.get(key))):
-            if self.tubes.get(key)[item] == ' ':
-                for times in range(quantity):
-                    self.tubes.get(key)[item + times] = value
-                break
+    def add(self, value, key):
+        if self.tubes.get(key)[-1] != ' ':
+            raise Exception
+        else:
+            for item in range(len(self.tubes.get(key))):
+                if self.tubes.get(key)[item] == ' ':
+                    self.tubes.get(key)[item] = value
+                    break
 
     def move(self, start, end):
         lst_s = self.tubes.get(start)
@@ -57,6 +73,9 @@ class Tube:
             index_e += 1
 
     # output methods only:
+    def __iter__(self):
+        return TubeIterator(self)
+
     def pos(self, *position):
         # returns the value of the given key (can return multiple)
         out = []
@@ -67,4 +86,3 @@ class Tube:
     def __str__(self):
         out = '\n'.join(str(x) for x in self.tubes.values())
         return out
-
